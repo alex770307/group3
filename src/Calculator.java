@@ -1,7 +1,3 @@
-public class Calculator {
-    public double converter(double amount, double fromCurrency, double toCurrency ){
-        double res = amount * toCurrency;
-        return res;
-    }
-
+public interface Calculator {
+    double convert(double amount, CurrencyType fromCurrency, CurrencyType toCurrency);
 }
