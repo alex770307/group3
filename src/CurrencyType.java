@@ -9,6 +9,7 @@ public enum CurrencyType {
         this.exchangeRate = exchangeRate;
     }
 
+
     @Override
     public String toString() {
         return "CurrencyType{" +

@@ -14,7 +14,8 @@ public class ExchangeTransaction {
     public ExchangeTransaction() {
     }
 
-    public ExchangeTransaction(LocalDate date, LocalTime time, double amount, String fromCurrency, String toCurrency, double result) {
+    public ExchangeTransaction(LocalDate date, LocalTime time, double amount,
+                               String fromCurrency, String toCurrency, double result) {
         this.date = date;
         this.time = time;
         this.amount = amount;
@@ -40,7 +41,12 @@ public class ExchangeTransaction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ExchangeTransaction that = (ExchangeTransaction) o;
-        return Double.compare(amount, that.amount) == 0 && Double.compare(result, that.result) == 0 && Objects.equals(date, that.date) && Objects.equals(time, that.time) && Objects.equals(fromCurrency, that.fromCurrency) && Objects.equals(toCurrency, that.toCurrency);
+        return Double.compare(amount, that.amount) == 0
+                && Double.compare(result, that.result) == 0
+                && Objects.equals(date, that.date)
+                && Objects.equals(time, that.time)
+                && Objects.equals(fromCurrency, that.fromCurrency)
+                && Objects.equals(toCurrency, that.toCurrency);
     }
 
     @Override

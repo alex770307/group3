@@ -21,11 +21,13 @@ public class MainRuslana {
         System.out.println("Введите исходящую валюту валюту: EUR,USD, GBD");
         String fromCurrency = scanner.nextLine().toUpperCase();
 
-        double result = calculate.convert(amount, CurrencyType.valueOf(toCurrency), CurrencyType.valueOf(fromCurrency));
+        double result = calculate.convert(amount, CurrencyType.valueOf(toCurrency),
+                CurrencyType.valueOf(fromCurrency));
         System.out.println("Вот ваша сумма: " + result);
 
 
-        ExchangeTransaction transaction = new ExchangeTransaction( localDate, localTime, amount, fromCurrency, toCurrency, result);
+        ExchangeTransaction transaction = new ExchangeTransaction( localDate,
+                localTime, amount, fromCurrency, toCurrency, result);
         ExchangeHistory history = new ExchangeHistory();
 
         history.addTransaction(transaction);
