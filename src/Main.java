@@ -5,9 +5,10 @@
 //	 Проверяем, что названия валют правильные
 //	 Выполняем конвертацию и выводим результат
 //	 Фиксируем дату и добавляем транзакцию в историю
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,23 +36,27 @@ public class Main {
                 scanner.nextLine();
                 System.out.println("Введите название исходной валюты (например USD, GBP или EUR):");
                 String toCurrency = scanner.nextLine().toUpperCase();
+
                 System.out.println("Введите название целевой валюты (например USD, GBP или EUR):");
+
                 String fromCurrency = scanner.nextLine().toUpperCase();
-                if (!(fromCurrency.equalsIgnoreCase("USD")
-                        || fromCurrency.equalsIgnoreCase("EUR")
-                        || fromCurrency.equalsIgnoreCase("GBP"))
-                        || !(toCurrency.equalsIgnoreCase("USD")
-                        || toCurrency.equalsIgnoreCase("EUR")
-                        || toCurrency.equalsIgnoreCase("GBP"))) {
+
+                Optional<CurrencyType> optional = Arrays.stream(CurrencyType.values())
+                        .filter(type -> type.name().equals(toCurrency))
+                        .findFirst();
+                Optional<CurrencyType> optionalSecond = Arrays.stream(CurrencyType.values())
+                        .filter(type -> type.name().equals(fromCurrency))
+                        .findFirst();
+                if (optional.isPresent() && optionalSecond.isPresent()) {
+                    double result = calculate.convert(amount, CurrencyType.valueOf(toCurrency),
+                            CurrencyType.valueOf(fromCurrency));
+                    ExchangeTransaction transaction = new ExchangeTransaction(localDate,
+                            localTime, amount, fromCurrency, toCurrency, result);
+                    history.addTransaction(transaction);
+                    System.out.println(transaction);
+                } else {
                     System.out.println("Неправильное название валюты.");
-                    continue;
                 }
-                double result = calculate.convert(amount, CurrencyType.valueOf(toCurrency),
-                        CurrencyType.valueOf(fromCurrency));
-                ExchangeTransaction transaction = new ExchangeTransaction(localDate,
-                        localTime, amount, fromCurrency, toCurrency, result);
-                history.addTransaction(transaction);
-                System.out.println(transaction);
             } else if (selection == 2) {
                 System.out.println("Список трансакций :");
                 history.displayHistory();
