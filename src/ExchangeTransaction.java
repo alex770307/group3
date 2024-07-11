@@ -1,3 +1,6 @@
+//   Класс ExchangeTransaction - класс сущность, который содержит необходимые поля и информацию.
+
+// 	 Конструктор для инициализации всех полей
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
