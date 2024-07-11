@@ -9,16 +9,18 @@ public class Main {
         ExchangeHistory history = new ExchangeHistory();
         CurrencyConverter calculate = new CurrencyConverter();
 
-        LocalTime localTime = LocalTime.now();
         LocalDate localDate = LocalDate.now();
+        LocalTime localTime = LocalTime.now();
+
+        System.out.println("\nДобро пожаловать в приложение 'Обмен валюты'!");
+
         while (true) {
-            // Выводим меню пользователю
-            System.out.println("Добро пожаловать в приложение 'Обмен валюты'!");
-            System.out.println("1: Обмен валют");
+
+            System.out.println("\n1: Обмен валют");
             System.out.println("2: Просмотреть историю обмена");
             System.out.println("3: Выход");
 
-            int selection = scanner.nextInt();      //выбор
+            int selection = scanner.nextInt();
 
             if (selection == 1) {
                 System.out.println("Введите сумму для обмена:");
@@ -28,22 +30,23 @@ public class Main {
                 String toCurrency = scanner.nextLine().toUpperCase();
                 System.out.println("Введите название целевой валюты (например USD, GBP или EUR):");
                 String fromCurrency = scanner.nextLine().toUpperCase();
-
+                if (!(fromCurrency.equalsIgnoreCase("USD")
+                        || fromCurrency.equalsIgnoreCase("EUR")
+                        || fromCurrency.equalsIgnoreCase("GBP"))
+                        || !(toCurrency.equalsIgnoreCase("USD")
+                        || toCurrency.equalsIgnoreCase("EUR")
+                        || toCurrency.equalsIgnoreCase("GBP"))) {
+                    System.out.println("Неправильное название валюты.");
+                    continue;
+                }
                 double result = calculate.convert(amount, CurrencyType.valueOf(toCurrency),
                         CurrencyType.valueOf(fromCurrency));
                 ExchangeTransaction transaction = new ExchangeTransaction(localDate,
                         localTime, amount, fromCurrency, toCurrency, result);
                 history.addTransaction(transaction);
                 System.out.println(transaction);
-
-                if (!fromCurrency.equalsIgnoreCase("USD") || !fromCurrency.equalsIgnoreCase("EUR")
-                        || !fromCurrency.equalsIgnoreCase("GBP") || !toCurrency.equalsIgnoreCase("USD")
-                        || !toCurrency.equalsIgnoreCase("EUR") || !toCurrency.equalsIgnoreCase("GBP")){
-                    System.out.println("Неправильное название валюты.");
-                    //return;
-                    //break;
-                }
             } else if (selection == 2) {
+                System.out.println("Список трансакций :");
                 history.displayHistory();
             } else if (selection == 3) {
                 System.out.println("Выход");
