@@ -1,11 +1,13 @@
 /**
  * Хранит названия валют и их курсы.
  */
-
 public enum CurrencyType {
     EUR(1),
-    USD(1.07),
-    GBP(0.89);
+    USD(1.09),
+    JPY(172.9),
+    CNH(7.92),
+    RUB(95.62),
+    GBP(0.84);
 
     private double exchangeRate;
 
@@ -16,7 +18,6 @@ public enum CurrencyType {
     CurrencyType(double exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
-
 
     /**
      * Возвращает строковое представление объекта.

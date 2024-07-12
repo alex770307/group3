@@ -4,7 +4,6 @@
  */
 public class CurrencyConverter implements Calculator {
 
-
     /**
      * Конвертирует сумму из одной валюты в другую.
      * @param amount сумма для конвертации
