@@ -5,7 +5,7 @@ import java.util.List;
  * Класс для хранения истории всех транзакций обмена валют.
  * Реализует интерфейсы HistoryFirst и HistorySecond.
  */
-public class ExchangeHistory implements HistoryFirst, HistorySecond {
+public class ExchangeHistory implements History {
 
     /**
      * Список для хранения истории транзакций.
